@@ -6,30 +6,34 @@
     <title>Meals</title>
 </head>
 <body>
-<h3><a href="index.html">Meals</a></h3>
+<h3><a href="index.html">Home</a></h3>
 <hr>
 <h2>Meals</h2>
 <style>
-    td {
+    table, td, th {
         text-align: center;
         vertical-align: middle;
+        border-collapse: collapse;
+        border: 2px solid black;
+    }
+    td, th {
+        padding: 10px 20px;
+        text-align: center;
     }
 </style>
-<table border="1">
+<table>
     <tr>
         <th>Date</th>
         <th>Description</th>
         <th>Calories</th>
     </tr>
+    <c:set var="dateFormat" value="${DateTimeFormatter.ofPattern(\"yyyy-MM-dd HH:mm\")}" />
     <jsp:useBean id="mealsTo" scope="request" type="java.util.List"/>
     <c:forEach var="meal" items="${mealsTo}">
-        <c:choose>
-            <c:when test="${meal.isExcess() == true}"><tr style="color: red;"></c:when>
-            <c:otherwise><tr style="color: green;"></c:otherwise>
-        </c:choose>
-        <td><c:out value="${meal.getDateTime().format(DateTimeFormatter.ofPattern(\"dd.MM.yyyy hh:mm\"))}"/></td>
-        <td><c:out value="${meal.getDescription()}"/></td>
-        <td><c:out value="${meal.getCalories()}"/></td>
+        <tr style="color:${meal.excess ? 'red' : 'green'}">
+        <td>${meal.dateTime.format(dateFormat)}</td>
+        <td>${meal.description}</td>
+        <td>${meal.calories}</td>
         </tr>
     </c:forEach>
 </table>
