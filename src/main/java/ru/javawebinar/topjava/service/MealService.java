@@ -10,7 +10,7 @@ import java.util.List;
 
 import static ru.javawebinar.topjava.util.DateTimeUtil.atStartOfDayOrMin;
 import static ru.javawebinar.topjava.util.DateTimeUtil.atStartOfNextDayOrMax;
-import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFound;
+import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
 public class MealService {
@@ -22,11 +22,11 @@ public class MealService {
     }
 
     public Meal get(int id, int userId) {
-        return checkNotFound(repository.get(id, userId), id);
+        return checkNotFoundWithId(repository.get(id, userId), id);
     }
 
     public void delete(int id, int userId) {
-        checkNotFound(repository.delete(id, userId), id);
+        checkNotFoundWithId(repository.delete(id, userId), id);
     }
 
     public List<Meal> getBetweenInclusive(@Nullable LocalDate startDate, @Nullable LocalDate endDate, int userId) {
@@ -38,7 +38,7 @@ public class MealService {
     }
 
     public void update(Meal meal, int userId) {
-        checkNotFound(repository.save(meal, userId), meal.getId());
+        checkNotFoundWithId(repository.save(meal, userId), meal.getId());
     }
 
     public Meal create(Meal meal, int userId) {

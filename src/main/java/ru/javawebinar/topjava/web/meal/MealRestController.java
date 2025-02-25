@@ -14,8 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import static ru.javawebinar.topjava.util.ValidationUtil.assureIdConsistent;
-import static ru.javawebinar.topjava.util.ValidationUtil.checkIsNew;
+import static ru.javawebinar.topjava.util.ValidationUtil.*;
 
 @Controller
 public class MealRestController {
